@@ -3,5 +3,10 @@
 
 echo -e "Proto\tLocal Address\t\tPID/Program name"
 
-# netstat ile dinleyen TCP/UDP bağlantılarını al, sadece tcp ve udp satırlarını filtrele
-netstat -lptu | awk '/^(tcp|udp)/ {printf "%-6s %-22s %s\n", $1, $4, $7}'
+output=$(netstat -lptu | awk '/^(tcp|udp)/ {printf "%-6s %-22s %s\n", $1, $4, $7}')
+
+if [ -z "$output" ]; then
+  echo "No listening TCP or UDP ports found."
+else
+  echo "$output"
+fi
