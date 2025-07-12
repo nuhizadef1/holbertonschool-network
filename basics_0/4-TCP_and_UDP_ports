@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 # Display listening TCP and UDP sockets with PID and program name
-echo "Proto  Local Address          PID/Program name"
-netstat -lptu | awk '/^(tcp|udp)/ {print $1, $4, $7}'
+
+echo -e "Proto\tLocal Address\t\tPID/Program name"
+
+# netstat ile dinleyen TCP/UDP bağlantılarını al, sadece tcp ve udp satırlarını filtrele
+netstat -lptu | awk '/^(tcp|udp)/ {printf "%-6s %-22s %s\n", $1, $4, $7}'
