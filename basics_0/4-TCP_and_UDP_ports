@@ -1,12 +1,3 @@
 #!/usr/bin/env bash
-# Display listening TCP and UDP sockets with PID and program name
-
-echo -e "Proto\tLocal Address\t\tPID/Program name"
-
-output=$(netstat -lptu | awk '/^(tcp|udp)/ {printf "%-6s %-22s %s\n", $1, $4, $7}')
-
-if [ -z "$output" ]; then
-  echo "No listening TCP or UDP ports found."
-else
-  echo "$output"
-fi
+#List Ports
+netstat --listening --program
